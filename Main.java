@@ -1,87 +1,83 @@
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
 
-    private static ArrayList<String> addresses = new ArrayList<String>();
-    private static ArrayList<String> passwords = new ArrayList<String>();
 
-    public static void addAddress(String address) {
-        addresses.add(address);
-    }
-
-    public static ArrayList<String> getAddresses() {
-        return addresses;
-    }
-
-    public static void addPassword(String password) {
-        passwords.add(password);
-    }
-
-    public static ArrayList<String> getPasswords() {
-        return passwords;
-    }
-
-    public static Scanner sc = new Scanner(System.in);
+    public static HashMap<String, String> addressesAndPasswords = new HashMap<String,String>();
 
     public static void main(String[] args) {
-        System.out.println("Welcome to our E-mail system!");
-        LoginOrSignIn();
+        Choice();
     }
 
-    public static void LoginOrSignIn(){
-        System.out.println("Press 1 if you want to log in");
-        System.out.println("Press 2 if you want to sign in");
+    public static void Choice() {
+        System.out.println("1. Log in");
+        System.out.println("2. Sign up");
         
-        int choice = sc.nextInt();
+        Scanner choiceScanner = new Scanner(System.in);
+        int choice = choiceScanner.nextInt();
 
-        if(choice == 1){
-            sc.nextLine();
-            Login();
-        }else if(choice == 2){
-            sc.nextLine();
-            SingIn();
-        }else{
+        try {
+            if (choice == 1) {
+                // Log in
+            } else if (choice == 2) {
+                // Sign up
+                Sign_up();
+            } else {
+                // Wrong number
+                System.out.println("Wrong number");
+                WrongChoice();
+            }
+        } catch (Exception e) {
+            // Not a number
+            System.out.println("Not a number");
             WrongChoice();
         }
+
     }
 
-    public static void WrongChoice(){
-        LoginOrSignIn();
+    // If wrong number or not a number
+    static void WrongChoice() {
+        Choice();
     }
 
-    public static void Login(){
-        System.out.println("E-mail address");
-        String email = sc.nextLine();
+    static void Sign_up(){
+        System.out.println("email address");
 
-        if(addresses.contains(email)){
-            System.out.println("Password");
-            String password = sc.nextLine();
-            if(passwords.contains(password)){
-                System.out.println("Logged in successfully");
-            }else{
-                System.out.println("Wrong password");
-                Login();
+        Scanner signUpScanner = new Scanner(System.in);
+        String inputAddress = signUpScanner.nextLine();
+        //If Hashmap contains the address
+        if(addressesAndPasswords.containsKey(inputAddress) == false){
+            //HashMap does not contains address
+            
+            
+            String address = inputAddress;
+
+            System.out.println("password");
+            String inputPassword = signUpScanner.nextLine();
+            
+            //If HashMap contains password
+            if(addressesAndPasswords.containsValue(inputPassword) == false){
+                //HashMap does not contains password
+
+                String password = inputPassword;
+
+                addressesAndPasswords.put(address, password);
+                System.out.println(addressesAndPasswords);
+                Choice();
+            }else if(addressesAndPasswords.containsValue(inputPassword) == true){
+                //HashMap contains password
+
+                WrongSign_up();
             }
-        }else{
-            System.out.println("Wrong email address");
-            Login();
+        }else if(addressesAndPasswords.containsKey(inputAddress) == true){
+            //HashMap contains address
+            WrongSign_up();
         }
     }
 
-    public static void SingIn(){
-        System.out.println("Please add a new E-mail address");
-        String newEmailAddress = sc.nextLine();
-        if(addresses.contains(newEmailAddress)){
-            System.out.println("There is an address called:" + newEmailAddress+ " . Please add a new one");
-            SingIn();
-        }
-        addresses.add(newEmailAddress);
-        System.out.println("Please add a new password");
-        String newPassword = sc.nextLine();
-        passwords.add(newPassword);
-        System.out.println(getAddresses());
-        System.out.println(getPasswords());
-        LoginOrSignIn();
+    static void WrongSign_up(){
+        Sign_up();
     }
+
 }
