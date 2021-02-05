@@ -41,6 +41,36 @@ public class Main {
         Choice();
     }
 
+    static void Log_in(){
+        System.out.println("Email address");
+
+        Scanner logInScanner = new Scanner(System.in);
+        String inputAddress = logInScanner.nextLine();
+        //If HashMap does not contain adderss
+        if(addressesAndPasswords.containsKey(inputAddress) == false){
+            WrongLog_in();
+
+            //else
+        }else if(addressesAndPasswords.containsKey(inputAddress) == true){
+            //Ask the password
+            System.out.println("Password");
+            String inputPassword = logInScanner.nextLine();
+
+            //Wrong password
+            if(addressesAndPasswords.containsValue(inputPassword) == false){
+                WrongLog_in();
+
+                //else
+            }else if(addressesAndPasswords.containsValue(inputPassword) == true){
+                //System
+            }
+        }
+    }
+
+    static void WrongLog_in(){
+        Log_in();
+    }
+
     static void Sign_up(){
         System.out.println("email address");
 
