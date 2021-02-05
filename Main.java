@@ -1,10 +1,16 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
 
+    public static ArrayList<String> sentMessage = new ArrayList<String>();
 
     public static HashMap<String, String> addressesAndPasswords = new HashMap<String,String>();
+
+    public static HashMap<String, ArrayList<String>> messages = new HashMap<String, ArrayList<String>>();
+
+    public static String address;
 
     public static void main(String[] args) {
         Choice();
@@ -20,6 +26,7 @@ public class Main {
         try {
             if (choice == 1) {
                 // Log in
+                Log_in();
             } else if (choice == 2) {
                 // Sign up
                 Sign_up();
@@ -53,6 +60,7 @@ public class Main {
             //else
         }else if(addressesAndPasswords.containsKey(inputAddress) == true){
             //Ask the password
+            address = inputAddress;
             System.out.println("Password");
             String inputPassword = logInScanner.nextLine();
 
@@ -63,8 +71,10 @@ public class Main {
                 //else
             }else if(addressesAndPasswords.containsValue(inputPassword) == true){
                 //System
+                System();
             }
         }
+
     }
 
     static void WrongLog_in(){
@@ -108,6 +118,63 @@ public class Main {
 
     static void WrongSign_up(){
         Sign_up();
+    }
+
+    static void System(){
+        //Checking unread messages
+        if(messages.containsKey(address) == false){
+            System.out.println("You haven`t got unread emails");
+        }else if(messages.containsKey(address) == true){
+            System.out.println("You have got unread messages");
+            //Show unread messages
+            System.out.println(messages.get(address));
+        }
+
+        //Write emails or Exit
+        System.out.println("1.Write");
+        System.out.println("2.Exit");
+        System.out.println("3. All messages");
+
+        Scanner systemScanner = new Scanner(System.in);
+        int input = systemScanner.nextInt();
+
+        try {
+            if (input == 1) {
+                //Write
+                Write();
+            } else if (input == 2) {
+                //Exit
+                Choice();
+            }
+            else {
+                // Wrong number
+                System.out.println("Wrong number");
+                System();
+            }
+        } catch (Exception e) {
+            // Not a number
+            System.out.println("Not a number");
+            System();
+        }
+
+    }
+
+    static void Write(){
+        System.out.println("Email address to write");
+        Scanner writeScanner = new Scanner(System.in);
+        String addressToWrite = writeScanner.nextLine();
+
+        //Check if address exsits
+        if(addressesAndPasswords.containsKey(addressToWrite) == false){
+            System.out.println("Address does not exist");
+            Write();
+        }else if(addressesAndPasswords.containsKey(addressToWrite) == true){
+            System.out.println("The message:");
+            String message = writeScanner.nextLine();
+            sentMessage.add(message);
+            messages.put(addressToWrite, sentMessage);
+            Choice();
+        }
     }
 
 }
