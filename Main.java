@@ -1,3 +1,5 @@
+//TODO: Zárojeleket elhagyni mikor kiirja az olvasatlan üzenetet
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -11,6 +13,8 @@ public class Main {
     public static HashMap<String, ArrayList<String>> messages = new HashMap<String, ArrayList<String>>();
 
     public static String address;
+    
+    public static String messageString; 
 
     public static void main(String[] args) {
         Choice();
@@ -19,6 +23,7 @@ public class Main {
     public static void Choice() {
         System.out.println("1. Log in");
         System.out.println("2. Sign up");
+        System.out.println("3. Exit");
         
         Scanner choiceScanner = new Scanner(System.in);
         int choice = choiceScanner.nextInt();
@@ -30,6 +35,11 @@ public class Main {
             } else if (choice == 2) {
                 // Sign up
                 Sign_up();
+            
+            } else if(choice == 3){
+                //Exit
+                System.out.println("Exiting...");
+                System.exit(0);
             } else {
                 // Wrong number
                 System.out.println("Wrong number");
@@ -103,7 +113,7 @@ public class Main {
                 String password = inputPassword;
 
                 addressesAndPasswords.put(address, password);
-                System.out.println(addressesAndPasswords);
+                //System.out.println(addressesAndPasswords);
                 Choice();
             }else if(addressesAndPasswords.containsValue(inputPassword) == true){
                 //HashMap contains password
@@ -127,13 +137,14 @@ public class Main {
         }else if(messages.containsKey(address) == true){
             System.out.println("You have got unread messages");
             //Show unread messages
-            System.out.println(messages.get(address));
+            messageString = sentMessage.toString();
+            //System.out.println(messages.get(address));
+            System.out.println(messageString);
         }
 
         //Write emails or Exit
         System.out.println("1.Write");
         System.out.println("2.Exit");
-        System.out.println("3. All messages");
 
         Scanner systemScanner = new Scanner(System.in);
         int input = systemScanner.nextInt();
