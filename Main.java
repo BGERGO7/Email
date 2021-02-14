@@ -1,20 +1,18 @@
-//TODO: Zárojeleket elhagyni mikor kiirja az olvasatlan üzenetet
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
 
-    public static ArrayList<String> sentMessage = new ArrayList<String>();
-
     public static HashMap<String, String> addressesAndPasswords = new HashMap<String,String>();
 
     public static HashMap<String, ArrayList<String>> messages = new HashMap<String, ArrayList<String>>();
 
     public static String address;
+
+    public static ArrayList<String> sentMessage = new ArrayList<String>();
     
-    public static String messageString; 
+    //public static String messageString; 
 
     public static void main(String[] args) {
         Choice();
@@ -137,9 +135,9 @@ public class Main {
         }else if(messages.containsKey(address) == true){
             System.out.println("You have got unread messages");
             //Show unread messages
-            messageString = sentMessage.toString();
-            //System.out.println(messages.get(address));
-            System.out.println(messageString);
+            
+            System.out.println(messages.get(address));
+            
         }
 
         //Write emails or Exit
@@ -180,11 +178,21 @@ public class Main {
             System.out.println("Address does not exist");
             Write();
         }else if(addressesAndPasswords.containsKey(addressToWrite) == true){
-            System.out.println("The message:");
-            String message = writeScanner.nextLine();
-            sentMessage.add(message);
-            messages.put(addressToWrite, sentMessage);
-            Choice();
+            
+            //Check if the address Hashmap contains value of the address
+            if(messages.containsKey(addressToWrite) == false){
+              System.out.println("The message:");
+              String message = writeScanner.nextLine();
+              ArrayList<String> sentMessage = new ArrayList<String>();
+              sentMessage.add(message);
+              messages.put(addressToWrite, sentMessage);
+              Choice();
+            }else if(messages.containsKey(addressToWrite) == true){
+              System.out.println("The message:");
+              String message = writeScanner.nextLine();
+              messages.get(addressToWrite).add(message);
+              Choice();
+            }
         }
     }
 
