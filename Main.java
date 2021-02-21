@@ -11,8 +11,6 @@ public class Main {
     public static String address;
 
     public static ArrayList<String> sentMessage = new ArrayList<String>();
-    
-    //public static String messageString; 
 
     public static void main(String[] args) {
         Choice();
@@ -41,12 +39,14 @@ public class Main {
             } else {
                 // Wrong number
                 System.out.println("Wrong number");
-                WrongChoice();
+                //WrongChoice();
+                Choice();
             }
         } catch (Exception e) {
             // Not a number
             System.out.println("Not a number");
-            WrongChoice();
+            //WrongChoice();
+            Choice();
         }
 
     }
@@ -58,9 +58,15 @@ public class Main {
 
     static void Log_in(){
         System.out.println("Email address");
+        System.out.println("2.Exit");
 
         Scanner logInScanner = new Scanner(System.in);
         String inputAddress = logInScanner.nextLine();
+        //If input is Exit
+        if(inputAddress == "2"){
+          Choice();
+        }
+
         //If HashMap does not contain adderss
         if(addressesAndPasswords.containsKey(inputAddress) == false){
             WrongLog_in();
@@ -90,10 +96,16 @@ public class Main {
     }
 
     static void Sign_up(){
-        System.out.println("email address");
+        System.out.println("Email address");
+        System.out.println("2.Exit");
 
         Scanner signUpScanner = new Scanner(System.in);
         String inputAddress = signUpScanner.nextLine();
+        //If intput is exit
+        if(inputAddress == "2"){
+          Choice();
+        }
+        
         //If Hashmap contains the address
         if(addressesAndPasswords.containsKey(inputAddress) == false){
             //HashMap does not contains address
@@ -115,12 +127,13 @@ public class Main {
                 Choice();
             }else if(addressesAndPasswords.containsValue(inputPassword) == true){
                 //HashMap contains password
-
-                WrongSign_up();
+                Sign_up();
+                //WrongSign_up();
             }
         }else if(addressesAndPasswords.containsKey(inputAddress) == true){
             //HashMap contains address
-            WrongSign_up();
+            Sign_up();
+            //WrongSign_up();
         }
     }
 
@@ -170,8 +183,14 @@ public class Main {
 
     static void Write(){
         System.out.println("Email address to write");
+        System.out.println("2.Exit");
         Scanner writeScanner = new Scanner(System.in);
         String addressToWrite = writeScanner.nextLine();
+
+        //If input is Exit
+        if(addressToWrite == "2"){
+          Choice();
+        }
 
         //Check if address exsits
         if(addressesAndPasswords.containsKey(addressToWrite) == false){
