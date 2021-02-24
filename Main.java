@@ -70,8 +70,6 @@ public class Main {
         //If HashMap does not contain adderss
         if(addressesAndPasswords.containsKey(inputAddress) == false){
             WrongLog_in();
-
-            //else
         }else if(addressesAndPasswords.containsKey(inputAddress) == true){
             //Ask the password
             address = inputAddress;
@@ -82,7 +80,6 @@ public class Main {
             if(addressesAndPasswords.containsValue(inputPassword) == false){
                 WrongLog_in();
 
-                //else
             }else if(addressesAndPasswords.containsValue(inputPassword) == true){
                 //System
                 System();
@@ -109,8 +106,7 @@ public class Main {
         //If Hashmap contains the address
         if(addressesAndPasswords.containsKey(inputAddress) == false){
             //HashMap does not contains address
-            
-            
+
             String address = inputAddress;
 
             System.out.println("password");
@@ -128,13 +124,12 @@ public class Main {
             }else if(addressesAndPasswords.containsValue(inputPassword) == true){
                 //HashMap contains password
                 Sign_up();
-                //WrongSign_up();
             }
         }else if(addressesAndPasswords.containsKey(inputAddress) == true){
             //HashMap contains address
             Sign_up();
-            //WrongSign_up();
         }
+
     }
 
     static void WrongSign_up(){
@@ -214,5 +209,4 @@ public class Main {
             }
         }
     }
-
 }
