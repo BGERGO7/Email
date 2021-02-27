@@ -26,35 +26,24 @@ public class Main {
 
         try {
             if (choice == 1) {
-                // Log in
                 Log_in();
             } else if (choice == 2) {
-                // Sign up
                 Sign_up();
-            
             } else if(choice == 3){
                 //Exit
                 System.out.println("Exiting...");
                 System.exit(0);
             } else {
-                // Wrong number
                 System.out.println("Wrong number");
-                //WrongChoice();
                 Choice();
             }
         } catch (Exception e) {
-            // Not a number
             System.out.println("Not a number");
-            //WrongChoice();
             Choice();
         }
 
     }
 
-    // If wrong number or not a number
-    static void WrongChoice() {
-        Choice();
-    }
 
     static void Log_in(){
         System.out.println("Email address");
@@ -88,9 +77,6 @@ public class Main {
 
     }
 
-    static void WrongLog_in(){
-        Log_in();
-    }
 
     static void Sign_up(){
         System.out.println("Email address");
@@ -119,7 +105,6 @@ public class Main {
                 String password = inputPassword;
 
                 addressesAndPasswords.put(address, password);
-                //System.out.println(addressesAndPasswords);
                 Choice();
             }else if(addressesAndPasswords.containsValue(inputPassword) == true){
                 //HashMap contains password
@@ -132,9 +117,6 @@ public class Main {
 
     }
 
-    static void WrongSign_up(){
-        Sign_up();
-    }
 
     static void System(){
         //Checking unread messages
@@ -143,9 +125,7 @@ public class Main {
         }else if(messages.containsKey(address) == true){
             System.out.println("You have got unread messages");
             //Show unread messages
-            
             System.out.println(messages.get(address));
-            
         }
 
         //Write emails or Exit
